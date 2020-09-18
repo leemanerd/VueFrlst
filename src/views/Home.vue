@@ -1,7 +1,15 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <p v-bind:title="messagze">내 위에 잠시 마우스를 올리면 동적으로 바인딩 된 title을 볼 수 있습니다!</p>
+    <p v-if="seen">이제 나를 볼 수 있어요</p>
+    <li v-for="(todo, i) in todos" v-bind:key="i">{{ todo.text }}</li>
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">메시지 뒤집기</button>
+    <input v-model="message" />
+    <HelloWorld></HelloWorld>
+    <HelloWorld></HelloWorld>
+    <HelloWorld></HelloWorld>
   </div>
 </template>
 
@@ -11,8 +19,27 @@ import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld
+  components: { HelloWorld },
+  data() {
+    return {
+      message: "안녕하세요 ! Vue.js!",
+      seen: false,
+      todos: [
+        { text: "JavaScript 배우기" },
+        { text: "Vue 배우기" },
+        { text: "무언가 멋진 것을 만들기" }
+      ]
+    };
+  },
+  methods: {
+    reverseMessage: function() {
+      this.message = this.message
+        .split("")
+        .reverse()
+        .join("");
+    }
   }
 };
 </script>
+<style lang="scss">
+</style>
